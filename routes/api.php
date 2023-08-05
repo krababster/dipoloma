@@ -18,3 +18,5 @@ Route::put("/products/{product_id}",[ProductController::class,"changeProducts"])
 
 Route::patch("/products/{product_id}",[ProductController::class,"changeProduct"]);
 
+Route::delete("/products/{product_id}",[ProductController::class,"deleteProduct"]);
+
