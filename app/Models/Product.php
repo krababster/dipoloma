@@ -11,4 +11,5 @@ class Product extends Model
 
     protected $fillable = ['product_name','product_price','product_compound','category_id'];
     protected $primaryKey = 'product_id';
+    public $timestamps = false;
 }
