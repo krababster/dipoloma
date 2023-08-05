@@ -21,4 +21,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get("/products",[ProductController::class,"getProducts"]);
 Route::get("/products/{product_id}",[ProductController::class,"getProduct"]);
+
 Route::post("/products",[ProductController::class,"addProduct"]);
+
+//Route::put("/products/{product_id}",[ProductController::class,"changeProduct"]);
+
+
+Route::put("/putProducts/{product_id}",[ProductController::class,"changeProduct"]);
+
