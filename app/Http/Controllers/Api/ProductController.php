@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
@@ -27,6 +28,22 @@ class ProductController extends Controller
     }
 
     public function addProduct(Request $request){
+
+        $request_data = $request->only(["product_name","product_price","product_compound","category_id"]);
+        $validator = Validator::make($request_data,[
+            "product_name"=>["required","string"],
+            "product_price"=>["required","integer"],
+            "product_compound"=>["required","string"],
+            "category_id"=>["required","integer"],
+        ]);
+
+        if($validator->fails()){
+            return response()->json([
+                "status"=>"false",
+                "errors"=>$validator->messages()
+            ],422 );
+        }
+
         $product = Product::create([
            "product_name"=>$request->product_name,
            "product_price"=>$request->product_price,
