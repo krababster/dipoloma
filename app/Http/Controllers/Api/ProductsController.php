@@ -32,11 +32,12 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        $request_data = $request->only(["product_name","product_price","product_compound","category_id"]);
+        $request_data = $request->only(["product_name","product_price","product_weight","product_compound","category_id"]);
 
         $validator = Validator::make($request_data,[
             "product_name"=>["required","string"],
             "product_price"=>["required","integer"],
+            "product_weight"=>["required",'regex:/^[0-9]+(\.[0-9][0-9]?)?$/'],
             "product_compound"=>["required","string"],
             "category_id"=>["required","integer"],
         ]);
@@ -51,6 +52,7 @@ class ProductsController extends Controller
         $product = Product::create([
             "product_name"=>$request->product_name,
             "product_price"=>$request->product_price,
+            "product_weight"=>$request->product_weight,
             "product_compound"=>$request->product_compound,
             "category_id"=>$request->category_id
         ]);
