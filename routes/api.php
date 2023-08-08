@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ProductsController;
+use App\Http\Controllers\Api\UserController;
 
 
 //Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -20,4 +21,8 @@ use App\Http\Controllers\Api\ProductsController;
 //
 //Route::delete("/products/{product_id}",[ProductController::class,"deleteProduct"]);
 
-Route::resource('products',ProductsController::class);
+Route::apiResource('products',ProductsController::class)->middleware('auth-token');
+
+
+Route::post('/registration',[UserController::class,'registration']);
+Route::post('/login',[UserController::class,'login']);

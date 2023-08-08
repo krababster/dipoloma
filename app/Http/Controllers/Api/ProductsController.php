@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\Validator;
 
 class ProductsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth-token')->only(['store']);
+    }
+
+
     /**
      * Display a listing of the resource.
      */
