@@ -50,4 +50,37 @@ class UserController extends Controller
             ],401);
         }
     }
+
+    public function logout(Request $request){
+        $user = User::where('user_login',$request->user_login)->first();
+        if(is_null($user)){
+            return response()->json([
+                "status"=>false
+            ],401);
+        }
+        $user->user_token = "";
+        $user->save();
+
+        return response()->json([
+            "status"=>true,
+            "message"=>"User log out"
+        ],200);
+    }
+
+    public function deleteUser($id){
+        $delete_user = User::find($id);
+
+
+        if(is_null($delete_user)){
+            return response()->json([
+                "status"=>false
+            ],400);
+        }
+        $delete_user->delete();
+        return response()->json([
+            "status"=>true,
+            "message"=>"User was deleted"
+        ],200);
+
+    }
 }

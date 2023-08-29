@@ -26,3 +26,5 @@ Route::apiResource('products',ProductsController::class)->middleware('auth-token
 
 Route::post('/registration',[UserController::class,'registration']);
 Route::post('/login',[UserController::class,'login']);
+Route::post('/logout',[UserController::class,'logout']);
+Route::delete('/deleteUser/{id}',[UserController::class,'deleteUser'])->middleware('auth-token');
